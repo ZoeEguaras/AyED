@@ -1,30 +1,30 @@
 package tp1.ejercicio8;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.LinkedList;
 
-public class Queue<T> extends Sequence<T> {
+public class Pila<T> extends Sequence<T> {
 	List<T> data;
 	
-	public Queue() {
-		data = new LinkedList<T>();
+	public Pila () {
+		data = new ArrayList<T>();
 	}
 	
-	public void enqueue (T dato) {
+	public void push (T dato) {
 		data.add(dato);
 	}
 	
-	public T dequeue () {
-		T dato = data.get(0);
-		data.remove(0);
+	public T pop () {
+		T dato = data.remove(data.size() - 1);
 		return dato;
 	}
 	
-	public T head () {
-		return data.get(0);
+	public T top () {
+		T dato = data.get(data.size() - 1);
+		return dato;
 	}
 	
-	public int size () {
+	public int size() {
 		return data.size();
 	}
 	

@@ -1,12 +1,12 @@
 package tp1.ejercicio9;
 
-import java.util.Stack;
+import tp1.ejercicio8.Pila;
 
 public class TestBalanceo {
 
 	public static boolean balanceo (String cadena) {
 		boolean balanceado = true;
-		Stack<Character> pila = new Stack<Character>();
+		Pila<Character> pila = new Pila<Character>();
 		int i = 0;
 		int corte = cadena.length();
 		
