@@ -1,6 +1,5 @@
 package tp2.ejercicio7;
 
-import tp1.ejercicio8.Queue;
 import tp2.ejercicio2.BinaryTree;
 
 public class ParcialArboles {
@@ -31,30 +30,24 @@ public class ParcialArboles {
 	 }
 	 
 	 private BinaryTree<Integer> buscarNum (BinaryTree<Integer> dato, int num) {
-		 BinaryTree<Integer> arbol = null;
-		 Queue<BinaryTree<Integer>> cola = new Queue<BinaryTree<Integer>>();
-		 cola.enqueue(dato);
-		 cola.enqueue(null);
-		 while (!cola.isEmpty()) {
-			 arbol = cola.dequeue();
-			 if (arbol != null) {
-				 if (arbol.getData() == num) {
-					 return arbol;
-				 } else {
-					 if (arbol.hasLeftChild()) {
-						 cola.enqueue(arbol.getLeftChild());
-					 }
-					 if (arbol.hasRightChild()) {
-						 cola.enqueue(arbol.getRightChild());
-					 }
-				 }	 
+		 if (dato.isLeaf()) {
+			 if (dato.getData() == num) {
+				 return dato;
+			 } else return null;
+		 } else {
+			 if (dato.getData() == num) {
+				 return dato;
 			 } else {
-				 if (!cola.isEmpty()) {
-					 cola.enqueue(null);
+				 BinaryTree<Integer> aux = new BinaryTree<Integer>();
+				 if (dato.hasLeftChild()) {
+					 aux = buscarNum(dato.getLeftChild(), num);
 				 }
+				 if (dato.hasRightChild() && aux == null) {
+					 aux = buscarNum(dato.getRightChild(), num);
+				 }
+				 return aux;
 			 }
 		 }
-		 return null;
 	 }
 	 
 	 private int contarUnicos (BinaryTree<Integer> arbol) {
