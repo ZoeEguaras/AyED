@@ -11,29 +11,25 @@ public class ParcialArboles {
 	}
 	
 	 public boolean isLeftTree (int num) {
-		if (!dato.isEmpty()) {
-			BinaryTree<Integer> arbolNum = buscarNum(dato, num);
-			if (arbolNum != null) {
-				int izq, der;
-				if (arbolNum.hasLeftChild()) {
-					izq = contarUnicos(arbolNum.getLeftChild());
-				} else izq = -1;
-				if (arbolNum.hasRightChild()) {
-					der = contarUnicos(arbolNum.getRightChild());
-				} else der = -1;
+		BinaryTree<Integer> arbolNum = buscarNum(dato, num);
+		if (arbolNum != null) {
+			int izq, der;
+			if (arbolNum.hasLeftChild()) {
+				izq = contarUnicos(arbolNum.getLeftChild());
+			} else izq = -1;
+			if (arbolNum.hasRightChild()) {
+				der = contarUnicos(arbolNum.getRightChild());
+			} else der = -1;
 				
-				if (izq > der) {
-					return true;
-				} else return false;
+			if (izq > der) {
+				return true;
 			} else return false;
 		} else return false;
 	 }
 	 
 	 private BinaryTree<Integer> buscarNum (BinaryTree<Integer> dato, int num) {
-		 if (dato.isLeaf()) {
-			 if (dato.getData() == num) {
-				 return dato;
-			 } else return null;
+		 if (dato.isEmpty()) {
+			 return null;
 		 } else {
 			 if (dato.getData() == num) {
 				 return dato;

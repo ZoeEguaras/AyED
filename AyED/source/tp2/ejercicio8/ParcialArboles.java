@@ -6,9 +6,7 @@ public class ParcialArboles {
 	
 	 public boolean esPrefijo (BinaryTree<Integer> arbol1, BinaryTree<Integer> arbol2) {
 		 if (arbol1.isEmpty()) {
-			 if (arbol2.isEmpty()) {
-				 return true;
-			 } else return false;
+			 return true;
 		 } else {
 			 if (arbol2.isEmpty()) {
 				 return false;
