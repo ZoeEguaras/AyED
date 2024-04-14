@@ -1,6 +1,6 @@
 package tp2.ejercicio2;
 
-public class Prueba {
+public class Test {
 	
 	public static void imprimir (BinaryTree<Integer> arbol) {
 		System.out.print(arbol.toString() + " - ");
@@ -20,13 +20,20 @@ public class Prueba {
 		BinaryTree<Integer> hijoDerecho= new BinaryTree<Integer>(78);
 		hijoDerecho.addRightChild(new BinaryTree <Integer>(55));
 		ab.addLeftChild(hijoIzquierdo);
-		ab.addRightChild(hijoDerecho); 
-
-		imprimir(ab);
-		System.out.print("\n");
-		imprimir(ab.espejo());
-		System.out.print("\n");
-		System.out.print("Cantidad de hojas: " + ab.contarHojas());
+		ab.addRightChild(hijoDerecho);
+		
+		if (!ab.isEmpty()) {
+			imprimir(ab);
+			System.out.println();
+			imprimir(ab.espejo());
+			System.out.println();
+		}
+		
+		System.out.println("Cantidad de hojas: " + ab.contarHojas());
+		
+		System.out.println();
+		System.out.println("Entre los niveles 1-2: ");
+		ab.entreNiveles(1, 2);
 	}
 
 }

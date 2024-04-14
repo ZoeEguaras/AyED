@@ -1,5 +1,7 @@
 package tp2.ejercicio2;
 
+import tp1.ejercicio8.Queue;
+
 public class BinaryTree <T> {
 	
 	private T data;
@@ -56,7 +58,7 @@ public class BinaryTree <T> {
 	}
 
 	public boolean isEmpty(){
-		return (this.isLeaf() && this.getData() == null);
+		return (this.getData() == null && this.isLeaf());
 	}
 
 	public boolean isLeaf() {
@@ -93,8 +95,8 @@ public class BinaryTree <T> {
 	}
 		
     public BinaryTree<T> espejo(){
-    	if (isLeaf()) {
-    		return new BinaryTree<T> (this.data);
+    	if (isEmpty()) {
+    		return null;
     	}
     	else {
     		BinaryTree<T> arbol = new BinaryTree<T>(this.data);
@@ -110,7 +112,30 @@ public class BinaryTree <T> {
 
 	// 0<=n<=m
 	public void entreNiveles(int n, int m){
-		
+		BinaryTree<T> arbol = null;
+		Queue<BinaryTree<T>> cola = new Queue<BinaryTree<T>>();
+		cola.enqueue(this);
+		cola.enqueue(null);
+		int nivel = 0;
+		while (!cola.isEmpty() && (nivel <= m)) {
+			arbol = cola.dequeue();
+			if (arbol != null) {
+				if ((nivel >= n) && (nivel <= m)) {
+					System.out.println(arbol.getData());
+				}
+				if (arbol.hasLeftChild()) {
+					cola.enqueue(arbol.getLeftChild());
+				}
+				if (arbol.hasRightChild()) {
+					cola.enqueue(arbol.getRightChild());
+				}
+			} else {
+				if (!cola.isEmpty()) {
+					cola.enqueue(null);
+					nivel ++;
+				}
+			}
+		}
     }
 		
 }
