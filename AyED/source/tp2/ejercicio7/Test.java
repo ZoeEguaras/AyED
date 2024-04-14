@@ -24,11 +24,13 @@ public class Test {
 		arbol.addLeftChild(hijoIzquierdo);
 		arbol.addRightChild(hijoDerecho);
 		
-		arbol.entreNiveles(0, 4);
-		
 		ParcialArboles parcial = new ParcialArboles(arbol);
-		System.out.println("El arbol es Izquierdo: " + parcial.isLeftTree(-5));
-
+		System.out.println("--------------- RESULTADOS ---------------");
+		System.out.println("¿Con num = 7 el arbol es Izquierdo? " + parcial.isLeftTree(7));
+		System.out.println("¿Con num = 2 el arbol es Izquierdo? " + parcial.isLeftTree(2));
+		System.out.println("¿Con num = -5 el arbol es Izquierdo? " + parcial.isLeftTree(-5));
+		System.out.println("¿Con num = 19 el arbol es Izquierdo? " + parcial.isLeftTree(19));
+		System.out.println("¿Con num = -3 el arbol es Izquierdo? " + parcial.isLeftTree(-3));
 	}
 
 }
