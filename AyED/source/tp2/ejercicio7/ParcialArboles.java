@@ -21,9 +21,7 @@ public class ParcialArboles {
 				der = contarUnicos(arbolNum.getRightChild());
 			} else der = -1;
 				
-			if (izq > der) {
-				return true;
-			} else return false;
+			return izq > der;
 		} else return false;
 	 }
 	 

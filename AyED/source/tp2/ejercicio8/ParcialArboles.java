@@ -15,27 +15,22 @@ public class ParcialArboles {
 	 }
 	 
 	 private boolean verificacion (BinaryTree<Integer> arbol1, BinaryTree<Integer> arbol2) {
-		 if (arbol1.isLeaf()) {
-			 if (arbol1.getData() != arbol2.getData()) {
-				 return false;
-			 } else return true;
+		 if (arbol1.getData() != arbol2.getData()) {
+			 return false;
 		 } else {
-			 if (arbol1.getData() != arbol2.getData()) {
-				 return false;
-			 } else {
-				 boolean aux = true;
-				 if (arbol1.hasLeftChild() && arbol2.hasLeftChild()) {
+			 boolean aux = true;
+			 if (arbol1.hasLeftChild()) {
+				 if (arbol2.hasLeftChild()) {
 					 aux = aux && esPrefijo(arbol1.getLeftChild(), arbol2.getLeftChild());
-				 } else if (arbol1.hasLeftChild()) {
-					 return false;
 				 }
-				 if (arbol1.hasRightChild() && arbol2.hasRightChild() && aux) {
+			 } else return false;
+			 if (arbol1.hasRightChild() && aux) {
+				 if (arbol2.hasRightChild()) {
 					 aux = aux && esPrefijo(arbol1.getRightChild(), arbol2.getRightChild());
-				 } else if (arbol1.hasRightChild()) {
-					 return false;
 				 }
-				 return aux;
 			 }
+			 return aux;
 		 }
-	 }
+	}
+
 }
