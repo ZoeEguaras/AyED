@@ -1,6 +1,5 @@
 package tp3.ejercicio2;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -50,9 +49,8 @@ public class RecorridosAG {
 	 
 	 private void numerosImparesMayoresQueInOrdenHelper (GeneralTree <Integer> a, Integer n, List <Integer> lista) {
 		 List <GeneralTree <Integer>> children = a.getChildren();
-		 Iterator <GeneralTree <Integer>> it = children.iterator();
-		 if (it.hasNext()) {
-			 GeneralTree <Integer> primerHijo = it.next();
+		 if (a.hasChildren()) {
+			 GeneralTree<Integer> primerHijo = children.get(0); 
 			 if (esImpar(primerHijo.getData()) && primerHijo.getData() > n) {
 				 lista.add(primerHijo.getData());
 			 }
@@ -60,10 +58,9 @@ public class RecorridosAG {
 		 if (esImpar(a.getData()) && a.getData() > n) {
 			 lista.add(a.getData());
 		 }
-		 if (it.hasNext()) {
-			 GeneralTree <Integer> child = it.next();
-			 numerosImparesMayoresQuePreOrdenHelper(child, n, lista);
-		 }
+		 for(int i=1; i < children.size(); i++) {
+	           numerosImparesMayoresQueInOrdenHelper(children.get(i), n, lista);
+	     }
 	 }
 	 
 	 /* Método que retorna una lista con los elementos impares del árbol “a” que sean mayores al valor “n”
@@ -90,15 +87,8 @@ public class RecorridosAG {
 	 /* Método que retorna una lista con los elementos impares del árbol “a” que sean mayores al valor “n”
 	 pasados como parámetros, recorrido por niveles. */
 	 
-	 public List<Integer> numerosImparesMayoresQuePorNiveles(GeneralTree <Integer> a, Integer n) {
+	 public List<Integer> numerosImparesMayoresQuePorNiveles (GeneralTree <Integer> a, Integer n) {
 		 List <Integer> listaImpares = new LinkedList <Integer> ();
-			if ((a != null) && (! a.isEmpty())) {
-				numerosImparesMayoresQuePorNivelesHelper(a, n, listaImpares);
-			}
-		 return listaImpares;
-	}
-	 
-	 private void numerosImparesMayoresQuePorNivelesHelper (GeneralTree <Integer> a, Integer n, List <Integer> lista) {
 		 GeneralTree<Integer> tree;
 		 Queue <GeneralTree<Integer>> cola = new Queue <GeneralTree<Integer>> ();
 		 cola.enqueue(a);
@@ -106,12 +96,13 @@ public class RecorridosAG {
 		 while (!cola.isEmpty()) {
 			 tree = cola.dequeue();
 			 if (esImpar(tree.getData()) && tree.getData() > n) {
-				 lista.add(tree.getData());
+				 listaImpares.add(tree.getData());
 			 }
 			 List <GeneralTree <Integer>> children = tree.getChildren();
 			 for (GeneralTree <Integer> child: children) {
 				 cola.enqueue(child);
 			 }
 		 }
+		 return listaImpares;
 	 }
 }
