@@ -1,4 +1,4 @@
-package tp3.ejercicio3;
+package tp3.ejercicio5;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -59,33 +59,6 @@ public class GeneralTree<T>{
 			children.remove(child);
 	}
 	
-	// Por niveles
-	
-	public int alturaNivel() {	 
-		GeneralTree<T> aux;
-		Queue<GeneralTree<T>> cola = new Queue<GeneralTree<T>>();
-		cola.enqueue(this);
-		cola.enqueue(null);
-		int nivel = 0;
-		
-		while (!cola.isEmpty()) {
-			aux = cola.dequeue();
-			if (aux != null) {
-				List <GeneralTree<T>> children = aux.getChildren();
-				for (GeneralTree<T> child: children) {
-					cola.enqueue(child);
-				}
-			} 
-			else {
-				if (!cola.isEmpty()) {
-					nivel += 1;
-					cola.enqueue(null);
-				}
-			}
-		}
-		return nivel;
-	}
-	
 	// En profundidad
 	
 	public int altura() {
@@ -99,39 +72,6 @@ public class GeneralTree<T>{
 		}
 		return max + 1;
 	}
-	
-	// Por niveles
-	
-	public int nivelNivel(T dato){
-		GeneralTree<T> aux;
-		Queue<GeneralTree<T>> cola = new Queue<GeneralTree<T>>();
-		cola.enqueue(this);
-		cola.enqueue(null);
-		int nivel = 0;
-		
-		while (!cola.isEmpty()) {
-			aux = cola.dequeue();
-			if (aux != null) {
-				if (aux.getData().equals(dato)) {
-					return nivel;
-				}
-				else {
-					List <GeneralTree<T>> children = aux.getChildren();
-					for (GeneralTree<T> child: children) {
-						cola.enqueue(child);
-					}
-					
-				}
-			} 
-			else {
-				if (!cola.isEmpty()) {
-					nivel += 1;
-					cola.enqueue(null);
-				}
-			}
-		}
-		return -1;
-	  }
 	
 	// En profundidad
 	
@@ -179,4 +119,40 @@ public class GeneralTree<T>{
 		}
 		return anchoMax;
 	}
+	
+	 public boolean esAncestro(T a, T b) {
+		 GeneralTree<T> subArbol = buscarArbolA(this, a);
+		 if (subArbol != null) {
+			 return buscarB(subArbol, b);
+		 }
+		 return false;
+	 }
+	 
+	 private GeneralTree<T> buscarArbolA (GeneralTree<T> arbol, T a) {
+		 if (arbol.getData().equals(a)) {
+			 return arbol;
+		 }
+		 GeneralTree<T> aux;
+		 List<GeneralTree<T>> children = arbol.getChildren();
+		 for (GeneralTree<T> child: children) {
+			 aux = buscarArbolA(child, a);
+			 
+			 if (aux != null) {
+				 return aux;
+			 }
+		 }
+		 return null;
+	 }
+	 
+	 private boolean buscarB (GeneralTree<T> arbol, T b) {
+		 if (arbol.getData().equals(b)) {
+			 return true;
+		 }
+		 boolean find = false;
+		 List<GeneralTree<T>> children = arbol.getChildren();
+		 for (GeneralTree<T> child: children) {
+			 find = find | buscarB(child, b);
+		 }
+		 return find;
+	 }
 }
