@@ -108,13 +108,13 @@ public class GeneralTree<T>{
 				}
 			} 
 			else {
-				if (!cola.isEmpty()) {
+				if (ancho > anchoMax) {
+					anchoMax = ancho;
 					ancho = 0;
+				}
+				if (!cola.isEmpty()) {
 					cola.enqueue(null);
 				}
-			}
-			if (ancho > anchoMax) {
-				anchoMax = ancho;
 			}
 		}
 		return anchoMax;
